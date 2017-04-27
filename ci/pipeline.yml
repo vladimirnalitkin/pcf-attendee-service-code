@@ -1,0 +1,30 @@
+---
+resources:
+- name: attendee-service
+  type: git
+  source:
+    uri: https://github.com/pivotal-education/pcf-attendee-service-code.git   #<----- REPLACE ME
+    branch: concourse_deployment
+
+- name: deploy-attendee-service
+  type: cf
+  source:
+    api: api.local.pcfdev.io        #<----- REPLACE ME
+    username: ci
+    password: pass
+    organization: p-spring-cloud-services    #<----- REPLACE ME
+    space: instances         #<----- REPLACE ME
+    skip_cert_check: true
+
+jobs:
+- name: build
+  public: true
+  plan:
+  - get: attendee-service
+  - task: package
+    file: attendee-service/ci/tasks/package.yml
+  - put: deploy-attendee-service
+    params:
+      manifest: attendee-service/manifest.yml
+      path: package-output/attendee-service.jar
+

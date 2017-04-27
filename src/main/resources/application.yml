@@ -1,0 +1,34 @@
+server:
+  port: 8181
+
+
+spring:
+  application:
+    name: attendee-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+---
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: root
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+
+---
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:mem:attendee_service
+    username: sa
+    driverClassName: org.h2.Driver
+    platform: h2
