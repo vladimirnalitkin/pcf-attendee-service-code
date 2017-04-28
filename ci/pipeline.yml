@@ -20,19 +20,19 @@ jobs:
 - name: test
   public: true
   plan:
-  - get: attendee-service-source
+  - get: attendee-service
     trigger: true
   - task: test
-    file: attendee-service-source/ci/tasks/test.yml
+    file: attendee-service/ci/tasks/test.yml
 
 - name: deploy
   public: true
   plan:
-  - get: attendee-service-source
+  - get: attendee-service
     trigger: true
     passed: [test]
   - task: package
-    file: attendee-service-source/ci/tasks/package.yml
+    file: attendee-service/ci/tasks/package.yml
   - put: deploy-attendee-service
     params:
       manifest: attendee-service/manifest.yml
@@ -41,10 +41,10 @@ jobs:
 - name: smoke_test
   public: true
   plan:
-  - get: attendee-service-source
+  - get: attendee-service
     trigger: true
     passed: [deploy]
   - task: smoke_test
-    file: attendee-service-source/ci/tasks/smoke-test.yml
+    file: attendee-service/ci/tasks/smoke-test.yml
     params:
       ATTENDEE_SERVICE_URL: https://attendee-service-droitural-relaxedness.local.pcfdev.io
