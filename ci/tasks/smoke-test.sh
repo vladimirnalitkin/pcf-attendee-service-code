@@ -9,7 +9,7 @@ if [ -z $ATTENDEE_SERVICE_URL ]; then
   exit 1
 fi
 
-pushd attendee-service-source
+pushd attendee-service
   echo "Running smoke tests for Attendee Service deployed at $ATTENDEE_SERVICE_URL"
   smoke-tests/bin/test $ATTENDEE_SERVICE_URL
 popd
