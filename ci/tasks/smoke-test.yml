@@ -7,9 +7,6 @@ image_resource:
     repository: ubuntu
     tag: "latest"
 
-params:
-  ATTENDEE_SERVICE_URL: http://attendee-service-droitural-relaxedness.local.pcfdev.io
-
 inputs:
 - name: attendee-service
 
