@@ -38,7 +38,7 @@ jobs:
       manifest: attendee-service/manifest.yml
       path: package-output/attendee-service.jar
 
-- name: smoke_test
+- name: smoke-test
   public: true
   plan:
   - get: attendee-service
